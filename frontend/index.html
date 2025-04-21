@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedicAI Assistant - Upload Files</title>
+    <title>MedicHelpAI - Upload Files</title>
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Overlay for mobile menu -->
+    <div class="overlay"></div>
+    
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h1 class="app-logo">MedicAI</h1>
+                <h1 class="app-logo">MedicHelpAI</h1>
                 <p class="app-tagline">AI-Powered Diagnostic Support</p>
             </div>
             <nav class="sidebar-nav">
@@ -24,7 +27,7 @@
                 </ul>
             </nav>
             <div class="sidebar-footer">
-                <p>© 2025 MedicAI</p>
+                <p>© 2025 MedicHelpAI</p>
                 <button id="darkModeToggle" class="theme-toggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -34,6 +37,7 @@
         <!-- Main Content -->
         <main class="main-content">
             <header class="content-header">
+                <!-- Menu toggle button will be inserted by JavaScript on mobile -->
                 <h2>Upload Patient Files</h2>
             </header>
 

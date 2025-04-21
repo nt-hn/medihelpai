@@ -214,6 +214,128 @@ function uploadFiles() {
         formData.append('files[]', file);
     });
     
+    console.log("Starting file upload with", selectedFiles.length, "files");
+    
+    // Create and configure XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    
+    // Update progress bar during upload
+    xhr.upload.addEventListener('progress', function(e) {
+        if (e.lengthComputable) {
+            const percentComplete = Math.round((e.loaded / e.total) * 100);
+            progressBar.style.width = percentComplete + '%';
+            progressPercent.textContent = percentComplete + '%';
+        }
+    });
+    
+    // Handle successful upload
+    xhr.addEventListener('load', function() {
+        console.log("Upload complete, status:", xhr.status);
+        console.log("Response:", xhr.responseText);
+        
+        if (xhr.status >= 200 && xhr.status < 300) {
+            try {
+                const response = JSON.parse(xhr.responseText);
+                console.log("Parsed response:", response);
+                
+                // Store session ID and other data
+                localStorage.setItem('medicai_session_id', response.session_id);
+                
+                // If there are immediate results, store them also
+                if (response.summary) {
+                    localStorage.setItem('medicai_summary', JSON.stringify(response.summary));
+                }
+                
+                if (response.diagnosis) {
+                    localStorage.setItem('medicai_diagnosis', JSON.stringify(response.diagnosis));
+                }
+                
+                // Hide file upload and progress elements
+                document.querySelector('.card').style.display = 'none';
+                
+                // Show success message
+                uploadSuccess.style.display = 'block';
+                
+                // Add session ID to links
+                const links = uploadSuccess.querySelectorAll('a');
+                links.forEach(link => {
+                    // Add session ID as query parameter
+                    const url = new URL(link.href, window.location.origin);
+                    url.searchParams.set('session_id', response.session_id);
+                    link.href = url.toString();
+                });
+                
+                showNotification(`${selectedFiles.length} files uploaded successfully!`, 'success');
+                
+                // If there was an error processing but upload succeeded
+                if (response.error) {
+                    showNotification(`Note: ${response.error}`, 'warning');
+                }
+            } catch (e) {
+                console.error('Error parsing response:', e);
+                showNotification('Error processing server response', 'error');
+                resetUploadUI();
+            }
+        } else {
+            try {
+                const errorData = JSON.parse(xhr.responseText);
+                showNotification(errorData.error || 'Upload failed', 'error');
+            } catch (e) {
+                showNotification(`Upload failed with status ${xhr.status}`, 'error');
+            }
+            resetUploadUI();
+        }
+    });
+    
+    // Handle upload errors
+    xhr.addEventListener('error', function() {
+        console.error("Network error during file upload");
+        showNotification('Network error during file upload', 'error');
+        resetUploadUI();
+    });
+    
+    // Handle upload abort
+    xhr.addEventListener('abort', function() {
+        console.warn("File upload was aborted");
+        showNotification('File upload was aborted', 'warning');
+        resetUploadUI();
+    });
+    
+    // Send the request
+    xhr.open('POST', `${API_BASE_URL}/upload`, true);
+    xhr.send(formData);
+    console.log("Upload request sent to", `${API_BASE_URL}/upload`);
+}
+
+/**
+ * Reset the upload UI after failure
+ */
+function resetUploadUI() {
+    const uploadProgress = document.getElementById('uploadProgress');
+    const uploadButton = document.getElementById('uploadButton');
+    
+    // Hide progress bar and enable upload button
+    uploadProgress.style.display = 'none';
+    uploadButton.disabled = false;
+}
+
+function uploadFiles() {
+    const uploadProgress = document.getElementById('uploadProgress');
+    const progressBar = uploadProgress.querySelector('.progress-bar');
+    const progressPercent = document.getElementById('progressPercent');
+    const uploadSuccess = document.getElementById('uploadSuccess');
+    const uploadButton = document.getElementById('uploadButton');
+    
+    // Show progress bar and disable upload button
+    uploadProgress.style.display = 'block';
+    uploadButton.disabled = true;
+    
+    // Create FormData object
+    const formData = new FormData();
+    selectedFiles.forEach(file => {
+        formData.append('files[]', file);
+    });
+    
     // Create and configure XMLHttpRequest
     const xhr = new XMLHttpRequest();
     
