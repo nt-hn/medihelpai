@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicAI Assistant - Upload Files</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">MedicAI</h1>
+                <p class="app-tagline">AI-Powered Diagnostic Support</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="index.html"><i class="fas fa-file-upload"></i> Upload Files</a></li>
+                    <li><a href="summary.html"><i class="fas fa-clipboard-list"></i> Patient Summary</a></li>
+                    <li><a href="diagnosis.html"><i class="fas fa-stethoscope"></i> Preliminary Diagnosis</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2025 MedicAI</p>
+                <button id="darkModeToggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Upload Patient Files</h2>
+            </header>
+
+            <div class="upload-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Upload Medical Documents</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">
+                            Upload patient medical records, test results, and other documents for AI analysis.
+                            Supported file types: PDF, JPG, PNG, TXT, DOCX.
+                        </p>
+                        
+                        <div id="uploadArea" class="upload-area">
+                            <div class="upload-icon">
+                                <i class="fas fa-file-medical"></i>
+                            </div>
+                            <h4>Drag and drop files here</h4>
+                            <p>or</p>
+                            <button id="browseFiles" class="btn-primary">Browse Files</button>
+                            <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.txt,.docx" hidden>
+                        </div>
+                        
+                        <div id="filePreview" class="file-preview"></div>
+                        
+                        <div id="uploadProgress" class="progress-container" style="display: none;">
+                            <div class="progress-label">
+                                <span>Uploading...</span>
+                                <span id="progressPercent">0%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button id="uploadButton" class="btn-primary" disabled>
+                            <i class="fas fa-upload"></i> Upload Files
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="uploadSuccess" class="upload-success" style="display: none;">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Files Uploaded Successfully</h3>
+                    <p>Your files have been uploaded and are ready for analysis.</p>
+                    <div class="success-actions">
+                        <a href="summary.html" class="btn-primary">
+                            <i class="fas fa-clipboard-list"></i> View Patient Summary
+                        </a>
+                        <a href="diagnosis.html" class="btn-secondary">
+                            <i class="fas fa-stethoscope"></i> Get Preliminary Diagnosis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html>

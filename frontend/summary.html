@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicAI Assistant - Patient Summary</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">MedicAI</h1>
+                <p class="app-tagline">AI-Powered Diagnostic Support</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-file-upload"></i> Upload Files</a></li>
+                    <li class="active"><a href="summary.html"><i class="fas fa-clipboard-list"></i> Patient Summary</a></li>
+                    <li><a href="diagnosis.html"><i class="fas fa-stethoscope"></i> Preliminary Diagnosis</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2025 MedicAI</p>
+                <button id="darkModeToggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Patient Summary</h2>
+            </header>
+
+            <div class="summary-container">
+                <div id="noSessionMessage" class="no-data-message">
+                    <div class="no-data-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>No Patient Data</h3>
+                    <p>Please upload patient files first to generate a summary.</p>
+                    <a href="index.html" class="btn-primary">
+                        <i class="fas fa-file-upload"></i> Upload Files
+                    </a>
+                </div>
+
+                <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generating patient summary...</p>
+                </div>
+
+                <div id="soapSummary" class="soap-container" style="display: none;">
+                    <div class="soap-section">
+                        <h3><i class="fas fa-comment-medical"></i> Subjective</h3>
+                        <div id="subjectiveContent" class="soap-content">
+                            <!-- Content will be added dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="soap-section">
+                        <h3><i class="fas fa-notes-medical"></i> Objective</h3>
+                        <div id="objectiveContent" class="soap-content">
+                            <!-- Content will be added dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="soap-section">
+                        <h3><i class="fas fa-clipboard-check"></i> Assessment</h3>
+                        <div id="assessmentContent" class="soap-content">
+                            <!-- Content will be added dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="soap-section">
+                        <h3><i class="fas fa-tasks"></i> Plan</h3>
+                        <div id="planContent" class="soap-content">
+                            <!-- Content will be added dynamically -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="actionButtons" class="action-buttons" style="display: none;">
+                    <a href="diagnosis.html" class="btn-primary">
+                        <i class="fas fa-stethoscope"></i> Get Preliminary Diagnosis
+                    </a>
+                    <button id="printSummary" class="btn-secondary">
+                        <i class="fas fa-print"></i> Print Summary
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/summary.js"></script>
+</body>
+</html>

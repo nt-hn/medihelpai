@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicAI Assistant - Preliminary Diagnosis</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">MedicAI</h1>
+                <p class="app-tagline">AI-Powered Diagnostic Support</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-file-upload"></i> Upload Files</a></li>
+                    <li><a href="summary.html"><i class="fas fa-clipboard-list"></i> Patient Summary</a></li>
+                    <li class="active"><a href="diagnosis.html"><i class="fas fa-stethoscope"></i> Preliminary Diagnosis</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2025 MedicAI</p>
+                <button id="darkModeToggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Preliminary Diagnosis</h2>
+            </header>
+
+            <div class="diagnosis-container">
+                <div id="noSessionMessage" class="no-data-message">
+                    <div class="no-data-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>No Patient Data</h3>
+                    <p>Please upload patient files first to generate diagnoses.</p>
+                    <a href="index.html" class="btn-primary">
+                        <i class="fas fa-file-upload"></i> Upload Files
+                    </a>
+                </div>
+
+                <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing patient data and generating diagnoses...</p>
+                </div>
+
+                <div id="diagnosisHeader" class="diagnosis-header" style="display: none;">
+                    <h3>Potential Diagnoses</h3>
+                    <p class="disclaimer">
+                        <i class="fas fa-info-circle"></i> 
+                        These are potential diagnoses based on AI analysis of the provided documents. 
+                        They should be used as a clinical decision support tool only. 
+                        Always apply your professional judgment.
+                    </p>
+                </div>
+
+                <div id="diagnosisList" class="diagnosis-list" style="display: none;">
+                    <!-- Diagnosis items will be added dynamically -->
+                </div>
+                
+                <div id="actionButtons" class="action-buttons" style="display: none;">
+                    <a href="summary.html" class="btn-secondary">
+                        <i class="fas fa-clipboard-list"></i> View Patient Summary
+                    </a>
+                    <button id="printDiagnosis" class="btn-secondary">
+                        <i class="fas fa-print"></i> Print Diagnoses
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Diagnosis Item Template (hidden) -->
+    <template id="diagnosisTemplate">
+        <div class="diagnosis-card">
+            <div class="diagnosis-card-header">
+                <h4 class="diagnosis-name">Diagnosis Name</h4>
+                <span class="confidence-badge">Confidence</span>
+            </div>
+            <div class="diagnosis-card-body">
+                <div class="diagnosis-section">
+                    <h5><i class="fas fa-info-circle"></i> Explanation</h5>
+                    <p class="diagnosis-explanation">Explanation text goes here</p>
+                </div>
+                <div class="diagnosis-section">
+                    <h5><i class="fas fa-clipboard-check"></i> Supporting Evidence</h5>
+                    <ul class="evidence-list">
+                        <!-- Evidence items will be added dynamically -->
+                    </ul>
+                </div>
+                <div class="diagnosis-section">
+                    <h5><i class="fas fa-search"></i> Suggested Follow-up</h5>
+                    <ul class="followup-list">
+                        <!-- Follow-up items will be added dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/main.js"></script>
+    <script src="js/diagnosis.js"></script>
+</body>
+</html>
